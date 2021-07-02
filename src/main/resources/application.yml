@@ -1,0 +1,33 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /credible
+spring:
+  application:
+    name: eventsourcing
+  jpa:
+    hibernate:
+      ddl-auto: update
+      use-new-id-generator-mappings: true
+    generate-ddl: true
+    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://postgres:5432/credibledb
+    username: credible
+    password: credible
+
+  security:
+    user.name: admin
+    user.password: admin
+
+axon:
+  axonserver:
+    servers: eventstore
+    componentName: credible
+  #serializer:
+    #general: jackson
+    #events: jackson
+    #messages: jackson
+

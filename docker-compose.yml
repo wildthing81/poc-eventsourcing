@@ -1,0 +1,47 @@
+version: '2'
+
+services:
+  axonserver:
+    image: axoniq/axonserver
+    hostname: axonserver
+    container_name: eventstore
+    networks:
+      - credible-be_default
+    volumes:
+      - axonserver-data:/data
+      - axonserver-events:/eventdata
+      - axonserver-config:/config:ro
+    ports:
+      - '8024:8024'
+      - '8124:8124'
+      - '8224:8224'
+  eventsourcer:
+    depends_on:
+      - axonserver
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        env: local
+    container_name: credible_es
+    networks:
+      - credible-be_default
+    #network_mode: "host"
+    environment:
+      JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,address=*:8005,suspend=n
+    ports:
+      - '8085:8085'
+      - '8005:8005'
+    volumes:
+      - ~/credible_es:/usr/local/tomcat/app-home
+
+networks:
+  credible-be_default:
+    external: true
+
+volumes:
+  credible_es:
+  axonserver-data:
+  axonserver-events:
+  axonserver-config:
+
