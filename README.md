@@ -1,5 +1,5 @@
-# credible-es
-Eventsourcing application for Credible
+# poc-es
+Eventsourcing service
 
 - Main language - Kotlin, SpringBoot
 - Testing - JUnit5, Mockk, Strikt(Assertions)
@@ -43,7 +43,7 @@ However, every commit message must:
    Run `<project>/docker-compose.yml` by clicking on green gutter-icon on 'services' key in file. 
    
 4. Open IntelliJ 'Services' view to find 2 containers - tomcat & axonserver running.Both containers will use same
-   network(**credible-be_default**) as the main application & database. 
+   network(**xxxx-be_default**) as the main application & database. 
 5. the docker-compose.yml runs tomcat in debug mode which allows hot reload
 
 ### Coding Style
